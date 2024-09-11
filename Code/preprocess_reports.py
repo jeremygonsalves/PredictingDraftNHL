@@ -36,12 +36,12 @@ class NltkPreprocessor():
     
     def lower(self):
         self._lowered = True
-        self.reports = self.reports.apply(lambda x: x.lower() if x is not np.NaN else x)
+        self.reports = self.reports.apply(lambda x: x.lower() if x is not np.nan else x)
         return self
     
     def remove_names(self, names : pd.Series):
         def _remove_names(row):
-            if row[self.report_name] is np.NaN:
+            if row[self.report_name] is np.nan:
                 return row[self.report_name]
             report = row[self.report_name]
             for part in row['Name'].split(' '):
@@ -63,13 +63,13 @@ class NltkPreprocessor():
         return self
     
     def remove_whitespace(self):
-        self.reports = self.reports.apply(lambda x: re.sub('\n', ' ', x) if x is not np.NaN else x)
-        self.reports = self.reports.apply(lambda x: re.sub('\r', '', x) if x is not np.NaN else x)
-        self.reports = self.reports.apply(lambda x: re.sub(' +', ' ', x) if x is not np.NaN else x)
+        self.reports = self.reports.apply(lambda x: re.sub('\n', ' ', x) if x is not np.nan else x)
+        self.reports = self.reports.apply(lambda x: re.sub('\r', '', x) if x is not np.nan else x)
+        self.reports = self.reports.apply(lambda x: re.sub(' +', ' ', x) if x is not np.nan else x)
         return self
     
     def tokenize_text(self):
-        self.tokens = self.reports.apply(lambda x: word_tokenize(x) if x is not np.NaN else x)
+        self.tokens = self.reports.apply(lambda x: word_tokenize(x) if x is not np.nan else x)
         return self
 
     def remove_stopwords(self, hockey_words=None):
@@ -83,7 +83,7 @@ class NltkPreprocessor():
             lambda x: [t for t in x 
                         if (t not in self.stop_words)
                             and (t not in hockey_words)]
-                      if x is not np.NaN else x
+                      if x is not np.nan else x
         )
             
         return self
@@ -104,7 +104,7 @@ class NltkPreprocessor():
         self.tokens = self.tokens.apply(
             lambda x: [t for t in x
                        if (t not in words)]
-                      if x is not np.NaN else x
+                      if x is not np.nan else x
         )
 
         return self
@@ -124,14 +124,14 @@ class NltkPreprocessor():
             stemmer = PorterStemmer()
             self.tokens = self.tokens.apply(
                 lambda x: [stemmer.stem(t) for t in x] 
-                          if x is not np.NaN else x
+                          if x is not np.nan else x
             )
         # snowball stemmer
         elif normalization == 'snowball':
             stemmer = SnowballStemmer()
             self.tokens = self.tokens.apply(
                 lambda x: [stemmer.stem(t) for t in x]
-                          if x is not np.NaN else x
+                          if x is not np.nan else x
             )
         # wordnet lemmatizer
         elif normalization == 'wordnet':
@@ -140,7 +140,7 @@ class NltkPreprocessor():
             lemmatizer = WordNetLemmatizer()
             self.tokens = self.tokens.apply(
                 lambda x: [lemmatizer.lemmatize(t) for t in x]
-                          if x is not np.NaN else x
+                          if x is not np.nan else x
             )
         else:
             ValueError(f"The normalization technique {normalization} is not supported.")
@@ -149,7 +149,7 @@ class NltkPreprocessor():
     
     def get_text(self):
         if self.tokens is not None:
-            return self.tokens.apply(lambda x: ' '.join(x) if x is not np.NaN else x)
+            return self.tokens.apply(lambda x: ' '.join(x) if x is not np.nan else x)
         return self.reports
 
 
@@ -189,7 +189,7 @@ def preprocess(prospect_df):
         
     # merge all reports together
     preprocessed_df.loc[:,'all_reports'] = preprocessed_df[scouting_reports].apply(
-        lambda row: ' '.join([row[i] for i in row.index if row[i] is not np.NaN]),
+        lambda row: ' '.join([row[i] for i in row.index if row[i] is not np.nan]),
         axis=1
     )
 

@@ -9,9 +9,11 @@ from sklearn.base import clone, BaseEstimator, ClassifierMixin
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-
-
-
+from sklearn.base import BaseEstimator, ClassifierMixin, clone
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import numpy as np
+from tqdm import tqdm
 
 
 class LogisticOrdinalRegression(BaseEstimator, ClassifierMixin):
@@ -25,7 +27,6 @@ class LogisticOrdinalRegression(BaseEstimator, ClassifierMixin):
                  intercept_scaling=1, class_weight=None, random_state=None, solver='lbfgs', 
                  max_iter=100, multi_class='auto', verbose=0, warm_start=False, n_jobs=None, 
                  l1_ratio=None):
-        
         self.penalty = penalty
         self.dual = dual
         self.tol = tol
@@ -43,18 +44,23 @@ class LogisticOrdinalRegression(BaseEstimator, ClassifierMixin):
         self.l1_ratio = l1_ratio
 
     def fit(self, X, y):
-
+        # Initialize the base classifier (Logistic Regression)
         self.clf_ = LogisticRegression(**self.get_params())
         self.clfs_ = {}
 
-        self.unique_class_ = np.sort(np.unique(y))
+        # Get unique classes and set classes_ attribute
+        self.classes_ = np.unique(y)  # This is necessary for compatibility with scikit-learn
+        self.unique_class_ = np.sort(self.classes_)
+        
+        # If there are more than two classes, fit ordinal classifiers
         if self.unique_class_.shape[0] > 2:
             for i in tqdm(range(self.unique_class_.shape[0]-1)):
-                # for each k - 1 ordinal value we fit a binary classification problem
+                # For each ordinal value, fit a binary classifier
                 binary_y = (y > self.unique_class_[i]).astype(np.uint8)
                 clf = clone(self.clf_)
                 clf.fit(X, binary_y)
                 self.clfs_[i] = clf
+        return self
 
     def predict_proba(self, X):
         clfs_predict = {k: self.clfs_[k].predict_proba(X) for k in self.clfs_}
@@ -62,13 +68,13 @@ class LogisticOrdinalRegression(BaseEstimator, ClassifierMixin):
         for i, y in enumerate(self.unique_class_):
             if i == 0:
                 # V1 = 1 - Pr(y > V1)
-                predicted.append(1 - clfs_predict[i][:,1])
+                predicted.append(1 - clfs_predict[i][:, 1])
             elif i in clfs_predict:
                 # Vi = Pr(y > Vi-1) - Pr(y > Vi)
-                 predicted.append(clfs_predict[i-1][:,1] - clfs_predict[i][:,1])
+                predicted.append(clfs_predict[i-1][:, 1] - clfs_predict[i][:, 1])
             else:
                 # Vk = Pr(y > Vk-1)
-                predicted.append(clfs_predict[i-1][:,1])
+                predicted.append(clfs_predict[i-1][:, 1])
         return np.vstack(predicted).T
 
     def predict(self, X):
@@ -77,6 +83,7 @@ class LogisticOrdinalRegression(BaseEstimator, ClassifierMixin):
     def score(self, X, y, sample_weight=None):
         _, indexed_y = np.unique(y, return_inverse=True)
         return accuracy_score(indexed_y, self.predict(X), sample_weight=sample_weight)
+
 
 
 
