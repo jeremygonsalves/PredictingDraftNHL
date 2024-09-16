@@ -2,4 +2,7 @@
 
 .venv/
 Code/__pycache__
-
+Code/NLP_Draft_Analysis_Example.ipynb
+Code/NLP_Draft_Analysis_tf-idf.ipynb
+Code/NLP_Draft_Analysis_w2vec.ipynb
+Code/2023_nhl_draft_prediction.ipynb
