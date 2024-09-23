@@ -27,6 +27,7 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 import numpy as np
 from tqdm import tqdm
+from sklearn.model_selection import GridSearchCV
 
 
 r""" models taken from Github from Quoc-Huy Nguyen and Ryan DeSalvio and repurposed for this project"""
@@ -38,9 +39,9 @@ class LogisticOrdinalRegression(BaseEstimator, ClassifierMixin):
     The primary changes are simply modifying the method signature for the __init__ method.
     """
 
-    def __init__(self, penalty='l2', *, dual=False, tol=0.001, C=1.0, fit_intercept=True, 
+    def __init__(self, penalty='l2', *, dual=False, tol=0.0001, C=1.0, fit_intercept=True, 
                  intercept_scaling=1, class_weight=None, random_state=None, solver='lbfgs', 
-                 max_iter=10, multi_class='auto', verbose=0, warm_start=False, n_jobs=None, 
+                 max_iter=100, multi_class='auto', verbose=0, warm_start=False, n_jobs=None, 
                  l1_ratio=None):
         self.penalty = penalty
         self.dual = dual
@@ -99,6 +100,24 @@ class LogisticOrdinalRegression(BaseEstimator, ClassifierMixin):
         _, indexed_y = np.unique(y, return_inverse=True)
         return accuracy_score(indexed_y, self.predict(X), sample_weight=sample_weight)
 
+# Example of hyperparameter tuning using GridSearchCV
+param_grid = {
+    'penalty': ['l1', 'l2'],
+    'C': [0.1, 1, 10],
+    'solver': ['liblinear', 'lbfgs'],
+    'max_iter': [100, 200, 300]
+}
+
+grid_search = GridSearchCV(LogisticOrdinalRegression(), param_grid, cv=5, scoring='accuracy')
+grid_search.fit(X_train, y_train)
+
+print("Best parameters found: ", grid_search.best_params_)
+print("Best cross-validation accuracy: ", grid_search.best_score_)
+
+# Use the best estimator found by GridSearchCV
+best_model = grid_search.best_estimator_
+best_model.fit(X_train, y_train)
+
 
 
 
@@ -109,7 +128,7 @@ class RandomForestOrdinalClassifier(BaseEstimator, ClassifierMixin):
     The primary changes are simply modifying the method signature for the __init__ method.
     """
 
-    def __init__(self, n_estimators=1000, *, criterion='gini', max_depth=None, 
+    def __init__(self, n_estimators=100, *, criterion='gini', max_depth=None, 
                  min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, 
                  max_features='sqrt', max_leaf_nodes=None, min_impurity_decrease=0.0, 
                  bootstrap=True, oob_score=False, n_jobs=None, random_state=None, 
@@ -182,7 +201,7 @@ class SVMOrdinalClassifier(BaseEstimator, ClassifierMixin):
     """
 
     def __init__(self, C=1.0, kernel='rbf', degree=3, gamma='scale', coef0=0.0, shrinking=True,
-                 probability=True, tol=1e-3, cache_size=200, class_weight=None, verbose=False,
+                 tol=1e-3, cache_size=200, class_weight=None, verbose=False,
                  max_iter=-1, decision_function_shape='ovr', break_ties=False, random_state=None):
         self.C = C
         self.kernel = kernel
@@ -190,7 +209,6 @@ class SVMOrdinalClassifier(BaseEstimator, ClassifierMixin):
         self.gamma = gamma
         self.coef0 = coef0
         self.shrinking = shrinking
-        self.probability = probability
         self.tol = tol
         self.cache_size = cache_size
         self.class_weight = class_weight
