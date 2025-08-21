@@ -17,7 +17,7 @@ A comprehensive machine learning project that predicts NHL draft positions using
 - [Contributing](#contributing)
 - [License](#license)
 
-## 🎯 Overview
+## Overview
 
 This project explores historical NHL draft data to build predictive models for future player performance. It combines traditional scouting metrics with advanced natural language processing to analyze scouting reports and predict draft outcomes.
 
@@ -29,7 +29,7 @@ This project explores historical NHL draft data to build predictive models for f
 - **Comprehensive EDA**: Extensive exploratory data analysis and visualization
 - **Production-Ready**: Modular, well-documented, and tested codebase
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 PredictingDraftNHL/
@@ -88,7 +88,7 @@ PredictingDraftNHL/
     └── run_experiments.py
 ```
 
-## 🚀 Features
+## Features
 
 ### Data Processing
 - **Text Cleaning**: Advanced NLP preprocessing for scouting reports
@@ -114,7 +114,7 @@ PredictingDraftNHL/
 - **Feature Analysis**: Understanding model predictions
 - **Results Export**: High-quality figure and table generation
 
-## 💻 Installation
+## Installation
 
 ### Prerequisites
 
@@ -126,7 +126,7 @@ PredictingDraftNHL/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/PredictingDraftNHL.git
+   git clone https://github.com/jeremygonsalves/PredictingDraftNHL.git
    cd PredictingDraftNHL
    ```
 
@@ -163,12 +163,12 @@ PredictingDraftNHL/
    nltk.download('omw-1.4')
    ```
 
-## 🏃 Quick Start
+## Quick Start
 
 ### 1. Exploratory Data Analysis
 
 ```bash
-jupyter notebook notebooks/01_eda.ipynb
+jupyter notebook notebooks/EDA.py
 ```
 
 ### 2. Run Model Training
@@ -205,7 +205,7 @@ model = joblib.load('models/saved/best_model.pkl')
 predictions = model.predict(new_data)
 ```
 
-## 📊 Model Performance
+## Model Performance
 
 ### Current Results
 
@@ -223,7 +223,7 @@ predictions = model.predict(new_data)
 - **Position bias** exists in early draft rounds
 - **Physical attributes** (height/weight) have moderate predictive power
 
-## 📈 Data Sources
+##  Data Sources
 
 ### Primary Data
 - **NHL Draft Data**: Historical draft results (2014-2023)
@@ -239,7 +239,7 @@ predictions = model.predict(new_data)
 - The Painted Lines
 - FCHockey
 
-## 🔬 Methodology
+##  Methodology
 
 ### Data Preprocessing
 1. **Text Cleaning**: Remove player names, hockey-specific terms
@@ -360,9 +360,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- **Project Link**: [https://github.com/yourusername/PredictingDraftNHL](https://github.com/yourusername/PredictingDraftNHL)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/PredictingDraftNHL/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/PredictingDraftNHL/discussions)
+- **Project Link**: [https://github.com/jeremygonsalves/PredictingDraftNHL](https://github.com/jeremygonsalves/PredictingDraftNHL)
+- **Issues**: [GitHub Issues](https://github.com/jeremygonsalves/PredictingDraftNHL/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/jeremygonsalves/PredictingDraftNHL/discussions)
 
 ---
 
