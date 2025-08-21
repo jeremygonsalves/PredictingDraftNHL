@@ -101,22 +101,23 @@ class LogisticOrdinalRegression(BaseEstimator, ClassifierMixin):
         return accuracy_score(indexed_y, self.predict(X), sample_weight=sample_weight)
 
 # Example of hyperparameter tuning using GridSearchCV
-param_grid = {
-    'penalty': ['l1', 'l2'],
-    'C': [0.1, 1, 10],
-    'solver': ['liblinear', 'lbfgs'],
-    'max_iter': [100, 200, 300]
-}
+# This code is commented out as it requires X_train and y_train to be defined
+# param_grid = {
+#     'penalty': ['l1', 'l2'],
+#     'C': [0.1, 1, 10],
+#     'solver': ['liblinear', 'lbfgs'],
+#     'max_iter': [100, 200, 300]
+# }
 
-grid_search = GridSearchCV(LogisticOrdinalRegression(), param_grid, cv=5, scoring='accuracy')
-grid_search.fit(X_train, y_train)
+# grid_search = GridSearchCV(LogisticOrdinalRegression(), param_grid, cv=5, scoring='accuracy')
+# grid_search.fit(X_train, y_train)
 
-print("Best parameters found: ", grid_search.best_params_)
-print("Best cross-validation accuracy: ", grid_search.best_score_)
+# print("Best parameters found: ", grid_search.best_params_)
+# print("Best cross-validation accuracy: ", grid_search.best_score_)
 
-# Use the best estimator found by GridSearchCV
-best_model = grid_search.best_estimator_
-best_model.fit(X_train, y_train)
+# # Use the best estimator found by GridSearchCV
+# best_model = grid_search.best_estimator_
+# best_model.fit(X_train, y_train)
 
 
 

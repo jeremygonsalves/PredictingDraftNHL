@@ -1,5 +1,316 @@
-.venv/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+env.example
+# C extensions
+*.so
+tests
+results
 
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Project-specific - COMPREHENSIVE DATA EXCLUSIONS
+# Data files - exclude all large CSV files
+data/*.csv
+data/raw/*.csv
+data/processed/*.csv
+data/interim/*.csv
+data/external/*.csv
+
+# Model files - exclude all saved models
+models/saved/
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.model
+models/*.pt
+models/*.pth
+models/checkpoints/
+models/weights/
+
+# Results - exclude all generated outputs
+results/
+results/figures/
+results/tables/
+results/models/
+results/predictions/
+results/analysis/
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.svg
+*.eps
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup
+*.cache
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Large files and archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.bz2
+*.xz
+
+# Virtual environment
 .venv/
-Code/__pycache__
+venv/
+env/
+
+# Jupyter notebook checkpoints and outputs
+.ipynb_checkpoints/
+*.ipynb
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# Distribution and build files
+dist/
+build/
+*.egg-info/
+
+# Coverage reports
+.coverage
+htmlcov/
+.coverage.*
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific - ML/AI files
+*.pkl
+*.joblib
+*.h5
+*.model
+*.pt
+*.pth
+*.onnx
+*.tflite
+*.pb
+
+# Large data files
+*.parquet
+*.feather
+*.hdf5
+*.h5
+*.xlsx
+*.xls
+
+# Backup and temporary files
+*.save
+*.old
+*.orig
+*.rej
+*.orig
+*.bak
+*.tmp
+*.temp
+
+# Git files
+.gitignore.save
+.git/index.lock
+.git/HEAD.lock
+.git/refs/heads/*.lock
+
+# Node modules (if any)
+node_modules/
+
+# Large text files
+*.txt
+!requirements.txt
+!README.md
+!LICENSE
+!CONTRIBUTING.md
+
+# Documentation builds
+docs/_build/
+docs/build/
+
+# Test outputs
+test_outputs/
+test_results/
+.coverage
+htmlcov/
+
+# Large embeddings and vectors
+*.npy
+*.npz
+*.bin
+*.vec
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuration backups
+config.backup
+settings.backup
 
